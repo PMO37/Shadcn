@@ -3,54 +3,174 @@ title: Dark Mode
 description: Adding dark mode to your site.
 ---
 
-## Next.js
+<Tabs defaultValue="nextjs">
+  <TabsList>
+    <TabsTrigger value="nextjs">
+      Next.js
+    </TabsTrigger>
+    <TabsTrigger value="vite">
+      Vite
+    </TabsTrigger>
+  </TabsList>
 
-<Steps>
+  <TabsContent value="nextjs">
+   <Steps>
 
-### Create a theme provider
+    ### Create a theme provider
 
-```tsx title="components/theme-provider.tsx"
-"use client"
+    ```tsx title="components/theme-provider.tsx"
+    "use client"
 
-import * as React from "react"
-import { ThemeProvider as NextThemesProvider } from "next-themes"
-import { type ThemeProviderProps } from "next-themes/dist/types"
+    import * as React from "react"
+    import { ThemeProvider as NextThemesProvider } from "next-themes"
+    import { type ThemeProviderProps } from "next-themes/dist/types"
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
-}
-```
+    export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+      return <NextThemesProvider {...props}>{children}</NextThemesProvider>
+    }
+    ```
 
-### Wrap your root layout
+    ### Wrap your root layout
 
-Add the `ThemeProvider` to your root layout.
+    Add the `ThemeProvider` to your root layout.
 
-```tsx {1,9-11} title="app/layout.tsx"
-import { ThemeProvider } from "@/components/theme-provider"
+    ```tsx {1,9-11} title="app/layout.tsx"
+    import { ThemeProvider } from "@/components/theme-provider"
 
-export default function RootLayout({ children }: RootLayoutProps) {
-  return (
-    <>
-      <html lang="en" suppressHydrationWarning>
-        <head />
-        <body>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
-          </ThemeProvider>
-        </body>
-      </html>
-    </>
-  )
-}
-```
+    export default function RootLayout({ children }: RootLayoutProps) {
+      return (
+        <>
+          <html lang="en" suppressHydrationWarning>
+            <head />
+            <body>
+              <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                {children}
+              </ThemeProvider>
+            </body>
+          </html>
+        </>
+      )
+    }
+    ```
 
-### Add a mode toggle
+    ### Add a mode toggle
 
-Place a mode toggle on your site to toggle between light and dark mode.
+    Place a mode toggle on your site to toggle between light and dark mode.
 
-<ComponentPreview name="mode-toggle" className="[&_.preview]:items-start" />
+    <ComponentPreview name="mode-toggle" className="[&_.preview]:items-start" />
 
-</Steps>
+    </Steps>
+
+      </TabsContent>
+
+      <TabsContent value="vite">
+
+    <Steps>
+
+    ### Create a theme provider
+
+    ```tsx title="themeContext.tsx"
+    import {
+      ReactNode,
+      createContext,
+      useCallback,
+      useContext,
+      useEffect,
+      useState,
+    } from "react"
+
+    interface IThemeContext {
+      theme: string
+      toggleTheme: () => void
+    }
+
+    export const ThemeContext = createContext<IThemeContext>({
+      theme: "light",
+      toggleTheme: () => console.warn("no theme provider"),
+    } as IThemeContext)
+
+    interface ThemeProviderProps {
+      children: ReactNode
+    }
+
+    export const ThemeProvider = ({ children }: ThemeProviderProps) => {
+      const [theme, setTheme] = useState<string>("light")
+
+      const toggleTheme = useCallback(() => {
+        const toggleTheme = theme === "light" ? "dark" : "light"
+        setTheme(toggleTheme)
+        window.localStorage.setItem("theme", toggleTheme)
+      }, [theme])
+
+      useEffect(() => {
+        const localTheme = window.localStorage.getItem("theme")
+        localTheme && setTheme(localTheme)
+      }, [])
+
+      useEffect(() => {
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark")
+        } else {
+          document.documentElement.classList.remove("dark")
+        }
+      }, [theme])
+
+      return (
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+          {children}
+        </ThemeContext.Provider>
+      )
+    }
+
+    export const useTheme = () => useContext<IThemeContext>(ThemeContext)
+    ```
+
+    ### Wrap your root layout
+
+    Add the ThemeProvider to your root layout.
+
+    ```tsx
+    import React from "react"
+    import ReactDOM from "react-dom"
+
+    import App from "./App"
+    import { ThemeProvider } from "./themeContext"
+
+    ReactDOM.render(
+      <React.StrictMode>
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </React.StrictMode>,
+      document.getElementById("root")
+    )
+    ```
+
+    ### Add a mode toggle
+
+    Place a mode toggle in your site to toggle between light and dark mode. You can use the useTheme hook to access
+    the theme and toggleTheme function.
+
+    ```tsx
+    import { useTheme } from "@/context/ThemeProvider"
+
+    import { Button } from "@/components/ui/button"
+
+    export const Home = () => {
+      const { toggleTheme, theme } = useTheme()
+      return (
+        <Button variant="outline" onClick={toggleTheme}>
+          Toggle theme to {theme === "light" ? "dark" : "light"}
+        </Button>
+      )
+    }
+    ```
+
+    </Steps>
+
+</TabsContent>
+
+</Tabs>
 
 ## Other frameworks
 
