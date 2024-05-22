@@ -4,6 +4,7 @@ import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
+import { useDirection } from "@radix-ui/react-direction"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -59,11 +60,12 @@ const Carousel = React.forwardRef<
     },
     ref
   ) => {
+    const dir = useDirection()
     const [carouselRef, api] = useEmblaCarousel(
       {
         ...opts,
         axis: orientation === "horizontal" ? "x" : "y",
-        direction: (document.dir as "ltr" | "rtl") ?? "ltr",
+        direction: dir,
       },
       plugins
     )
@@ -134,7 +136,7 @@ const Carousel = React.forwardRef<
           scrollNext,
           canScrollPrev,
           canScrollNext,
-          direction: (document.dir as "ltr" | "rtl") ?? "ltr",
+          direction: dir,
         }}
       >
         <div
