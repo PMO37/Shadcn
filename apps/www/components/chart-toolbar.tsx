@@ -7,6 +7,7 @@ import { Separator } from "@/registry/new-york/ui/separator"
 import { Block } from "@/registry/schema"
 
 import "@/styles/mdx.css"
+
 import {
   AreaChart,
   BarChartBig,

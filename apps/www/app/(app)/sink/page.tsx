@@ -61,10 +61,7 @@ export default function KitchenSinkPage() {
             <ComponentWrapper>
               <SliderDemo className="w-full" />
             </ComponentWrapper>
-            <ComponentWrapper
-              className="spa flex-col items-start space-x-0
-				space-y-2"
-            >
+            <ComponentWrapper className="spa flex-col items-start space-x-0 space-y-2">
               <p className="text-sm text-muted-foreground">Documentation</p>
               <p className="text-sm font-medium leading-none">
                 You can customize the theme using{" "}
