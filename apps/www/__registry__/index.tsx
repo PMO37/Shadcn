@@ -1402,6 +1402,17 @@ export const Index: Record<string, any> = {
       subcategory: "undefined",
       chunks: []
     },
+    "progress-max": {
+      name: "progress-max",
+      type: "components:example",
+      registryDependencies: ["progress"],
+      component: React.lazy(() => import("@/registry/default/example/progress-max")),
+      source: "",
+      files: ["registry/default/example/progress-max.tsx"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
     "radio-group-demo": {
       name: "radio-group-demo",
       type: "components:example",
@@ -4710,6 +4721,17 @@ export const Index: Record<string, any> = {
       component: React.lazy(() => import("@/registry/new-york/example/progress-demo")),
       source: "",
       files: ["registry/new-york/example/progress-demo.tsx"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
+    "progress-max": {
+      name: "progress-max",
+      type: "components:example",
+      registryDependencies: ["progress"],
+      component: React.lazy(() => import("@/registry/new-york/example/progress-max")),
+      source: "",
+      files: ["registry/new-york/example/progress-max.tsx"],
       category: "undefined",
       subcategory: "undefined",
       chunks: []
