@@ -2,8 +2,8 @@ import { existsSync } from "fs"
 import path from "path"
 import {
   Config,
-  RawConfig,
   getConfig,
+  RawConfig,
   resolveConfigPaths,
 } from "@/src/utils/get-config"
 import fg from "fast-glob"
