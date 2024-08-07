@@ -1028,6 +1028,17 @@ export const Index: Record<string, any> = {
       subcategory: "undefined",
       chunks: []
     },
+    "combobox-disable-items": {
+      name: "combobox-disable-items",
+      type: "components:example",
+      registryDependencies: ["command"],
+      component: React.lazy(() => import("@/registry/default/example/combobox-disable-items")),
+      source: "",
+      files: ["registry/default/example/combobox-disable-items.tsx"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
     "command-demo": {
       name: "command-demo",
       type: "components:example",
@@ -4336,6 +4347,17 @@ export const Index: Record<string, any> = {
       component: React.lazy(() => import("@/registry/new-york/example/combobox-responsive")),
       source: "",
       files: ["registry/new-york/example/combobox-responsive.tsx"],
+      category: "undefined",
+      subcategory: "undefined",
+      chunks: []
+    },
+    "combobox-disable-items": {
+      name: "combobox-disable-items",
+      type: "components:example",
+      registryDependencies: ["command"],
+      component: React.lazy(() => import("@/registry/new-york/example/combobox-disable-items")),
+      source: "",
+      files: ["registry/new-york/example/combobox-disable-items.tsx"],
       category: "undefined",
       subcategory: "undefined",
       chunks: []

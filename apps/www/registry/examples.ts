@@ -284,6 +284,12 @@ export const examples: Registry = [
     files: ["example/combobox-responsive.tsx"],
   },
   {
+    name: "combobox-disable-items",
+    type: "components:example",
+    registryDependencies: ["command"],
+    files: ["example/combobox-disable-items.tsx"],
+  },
+  {
     name: "command-demo",
     type: "components:example",
     registryDependencies: ["command"],

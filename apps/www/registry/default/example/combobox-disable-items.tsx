@@ -20,26 +20,11 @@ import {
 } from "@/registry/default/ui/popover"
 
 const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
+  { value: "next.js", label: "Next.js" },
+  { value: "sveltekit", label: "SvelteKit", disabled: true },
+  { value: "nuxt.js", label: "Nuxt.js" },
+  { value: "remix", label: "Remix", disabled: true },
+  { value: "astro", label: "Astro" },
 ]
 
 export default function ComboboxDemo() {
@@ -71,6 +56,7 @@ export default function ComboboxDemo() {
                 <CommandItem
                   key={framework.value}
                   value={framework.value}
+                  disabled={framework.disabled}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue)
                     setOpen(false)
